@@ -20,8 +20,29 @@
 </head>
 
 <body>
-    <h1>hello world!
-    </h1>
+    <div class="md:w-[70%] w-[90%] mx-auto my-[17px]">
+        <nav class="flex justify-between items-center flex-wrap">
+            <div class=" flex items-center gap-1">
+                <img class="w-9 h-[37px]" src="./assets/github-logo.png" alt="">
+                <p class="text-[#1F2937] text-6 font-semibold">GitHub Issues Tracker</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class=" relative ">
+                    <input class=" border border-gray-300 rounded-md text-gray-400  text-[16px] py-4 pl-9 " type="text"
+                        id="search" placeholder="Search issues...">
+                    <i class="fa-solid fa-magnifying-glass w-4 h-4 absolute text-gray-300 left-3 top-5.5"></i>
+                </div>
+                <div>
+                    <button
+                        class="bg-[#4A00FF] p-4 text-white font-semibold text-[16px] rounded-lg hover:bg-blue-400 "><span><i
+                                class="fa-solid fa-plus"></i></span>New Issue</button>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+
 
     <script src="script.js"></script>
 </body>
