@@ -42,15 +42,15 @@
     </div>
 
     <div class="md:w-[70%] mt-15 w-[90%] mx-auto gap-2 p-6 rounded-lg shadow bg-white flex">
-        <button id="all-btn"
-            class="text-[16px] bg-[#4A00FF] py-3 px-[38.5px] rounded-lg font-semibold border border-gray-300 text-white  hover:bg-blue-400  ">ALL</button>
-        <button id="open-btn"
-            class="text-[16px] font-semibold py-3 px-[38.5px] rounded-lg border border-gray-300 text-gray-400  hover:bg-blue-400 hover:text-white  ">Open</button>
-        <button id="closed-btn"
-            class="text-[16px] font-semibold py-3 px-[38.5px] rounded-lg border border-gray-300 text-gray-400  hover:bg-blue-400 hover:text-white ">Closed</button>
+        <button onclick="toggleStyle('all-btn')" id="all-btn"
+            class="text-[16px]  py-3 px-[38.5px] rounded-lg font-semibold border border-gray-300 bg-[#4A00FF] text-white  hover:bg-blue-400  ">ALL</button>
+        <button onclick="toggleStyle('open-btn')" id="open-btn"
+            class="text-[16px] font-semibold py-3 px-[38.5px] rounded-lg border border-gray-300 bg-white text-gray-400  hover:bg-blue-400 hover:text-white  ">Open</button>
+        <button onclick="toggleStyle('closed-btn')" id="closed-btn"
+            class="text-[16px] font-semibold py-3 px-[38.5px] rounded-lg border border-gray-300 bg-white text-gray-400  hover:bg-blue-400 hover:text-white ">Closed</button>
     </div>
 
-    <main class="md:w-[70%] mt-4 w-[90%] mx-auto  rounded-lg shadow bg-white">
+    <main class="md:w-[70%] mt-4 w-[90%] mx-auto flex-wrap  rounded-lg shadow bg-white">
         <section>
             <div class="flex justify-between p-6">
                 <div class="flex items-center gap-2">
@@ -79,7 +79,7 @@
         <hr class="border-gray-200">
 
         <section class="p-6">
-            <div class="grid md:grid-cols-4 gap-3 grid-cols-1">
+            <div id="issues-container" class="grid md:grid-cols-4 gap-3 grid-cols-1">
                 <div class="card rounded-md  border-t-2 border-t-green-600 p-4 shadow-md">
                     <div class="flex items-center justify-between">
                         <img class="status-img" src="./assets/Open-Status.png" alt="">
@@ -91,13 +91,15 @@
                             mobile
                             devices...</p>
                         <div class="flex gap-1 mt-3">
-                            <button
-                                class=" flex items-center text-[12px] rounded-full border border-red-300 bg-red-100 text-red-500 font-medium py-1.5 px-2 gap-1"><span><i
-                                        class="fa-solid fa-bug"></i></span>BUG</button>
-                            <button
-                                class="flex items-center text-[12px] rounded-full border border-orange-300 bg-orange-100 text-orange-700 font-medium py-1.5 px-2 gap-1"><i
-                                    class="fa-solid fa-life-ring"></i>HELP
-                                WANTED</button>
+                            <p
+                                class=" flex items-center text-[12px] rounded-full border border-red-300 bg-red-100 text-red-500 font-medium py-1.5 px-2 gap-1">
+                                <span><i class="fa-solid fa-bug"></i></span>BUG
+                            </p>
+                            <p
+                                class="flex items-center text-[12px] rounded-full border border-orange-300 bg-orange-100 text-orange-700 font-medium py-1.5 px-2 gap-1">
+                                <i class="fa-solid fa-life-ring"></i>HELP
+                                WANTED
+                            </p>
                         </div>
 
                     </div>
