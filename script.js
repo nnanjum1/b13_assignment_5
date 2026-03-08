@@ -1,14 +1,14 @@
-const signInbtn = document.querySelector(".btn-signIN");
-signInbtn.addEventListener("click", function () {
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
-    if (username === "admin" && password === "admin123") {
-        alert("Sign In Successful!");
-        window.location.href = "issues.html";
-    } else {
-        alert("Sign In failed");
-    }
-})
+// const signInbtn = document.querySelector(".btn-signIN");
+// signInbtn.addEventListener("click", function () {
+//     const username = document.getElementById("username").value.trim();
+//     const password = document.getElementById("password").value.trim();
+//     if (username === "admin" && password === "admin123") {
+//         alert("Sign In Successful!");
+//         window.location.href = "issues.html";
+//     } else {
+//         alert("Sign In failed");
+//     }
+// })
 
 let currentStatus = "all";
 
@@ -211,15 +211,39 @@ function openModal(issue) {
         priorityColor.bg = "bg-gray-600";
     }
 
+
+
     const capTitle = issue.title
         .split(" ")
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");
 
-    const capAssignee = issue.assignee
+    let name = "";
+
+    if (issue.assignee.length > 0) {
+        name = issue.assignee;
+    } else {
+        name = issue.author
+    }
+
+    const capAssignee = name
         .split("_")
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");
+
+    let unAssign = "";
+    if (issue.assignee.length > 0) {
+        unAssign = issue.assignee;
+    } else {
+        unAssign = "unassigned";
+    }
+
+    const unAssignee = unAssign
+        .split("_")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
+
 
     const modal = document.createElement("div");
 
@@ -254,7 +278,7 @@ function openModal(issue) {
         <div class="flex p-4 gap-3">
             <div class="flex-1">
                 <p class="text-gray-400 text-[16px] mb-1">Assignee:</p>
-                <p class="Assignee text-[#1F2937] font-semibold text-[16px]">${capAssignee}</p>
+                <p class="Assignee text-[#1F2937] font-semibold text-[16px]">${unAssignee}</p>
             </div>
             <div class="flex-1">
                 <p class="text-gray-400 text-[16px] mb-0">Priority:</p>
