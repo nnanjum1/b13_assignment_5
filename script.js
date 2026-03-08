@@ -1,14 +1,14 @@
-// const signInbtn = document.querySelector(".btn-signIN");
-// signInbtn.addEventListener("click", function () {
-//     const username = document.getElementById("username").value.trim();
-//     const password = document.getElementById("password").value.trim();
-//     if (username === "admin" && password === "admin123") {
-//         alert("Sign In Successful!");
-//         window.location.href = "issues.html";
-//     } else {
-//         alert("Sign In failed");
-//     }
-// })
+const signInbtn = document.querySelector(".btn-signIN");
+signInbtn.addEventListener("click", function () {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    if (username === "admin" && password === "admin123") {
+        alert("Sign In Successful!");
+        window.location.href = "issues.html";
+    } else {
+        alert("Sign In failed");
+    }
+})
 
 let currentStatus = "all";
 
@@ -101,13 +101,14 @@ function displayAllIssues(issues) {
     container.innerHTML = "";
     issuesNo.textContent = issues.length;
 
+
     issues.forEach(issue => {
         const labelsContent = issue.labels.map(label => {
             const data = labelObject[label] || {
-                icon: "fa-solid fa-tag",
-                bg: "bg-gray-100",
-                text: "text-gray-700",
-                border: "border-gray-300"
+                icon: " ",
+                bg: " ",
+                text: " ",
+                border: " "
             };
 
             return `<p class="flex items-center text-[10px] rounded-full border ${data.border} ${data.bg} ${data.text} font-medium py-1.5 px-2 gap-1">
@@ -135,8 +136,17 @@ function displayAllIssues(issues) {
             ? "./assets/Open-Status.png" : "./assets/Closed-Status.png";
 
 
+
+        const capTitle = issue.title
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+
         const allIssuesDiv = document.createElement("div");
         allIssuesDiv.classList.add("card");
+        allIssuesDiv.addEventListener("click", () => {
+            openModal(issue);
+        });
         allIssuesDiv.innerHTML = `
             <div class="rounded-md border-t-2 ${borderColor} p-4 shadow-md h-full">
                 <div class="flex items-center justify-between">
@@ -146,7 +156,7 @@ function displayAllIssues(issues) {
                     </p>
                 </div>
                 <div class="mt-3 mb-4">
-                    <h2 class="card-title font-semibold">${issue.title}</h2>
+                    <h2 class="card-title font-semibold">${capTitle}</h2>
                     <p class="title-text text-[12px] text-gray-400">${issue.description}</p>
                     <div class="flex gap-2 mt-3">
                         ${labelsContent}
@@ -170,3 +180,101 @@ loadAllIssues();
 allBtn.addEventListener("click", () => toggleStyle("all-btn"));
 openBtn.addEventListener("click", () => toggleStyle("open-btn"));
 closedBtn.addEventListener("click", () => toggleStyle("closed-btn"));
+
+function openModal(issue) {
+    const statusColor = issue.status === "open" ? "bg-green-600" : "bg-purple-600";
+    const priorityColor = {};
+    const labelsContent = issue.labels.map(label => {
+        const data = labelObject[label] || {
+            icon: " ",
+            bg: " ",
+            text: " ",
+            border: " "
+        };
+
+        return `<p class="flex items-center text-[10px] rounded-full border ${data.border} ${data.bg} ${data.text} font-medium py-1.5 px-2 gap-1">
+                        <span><i class="${data.icon}"></i></span> ${label.toUpperCase()}
+                    </p>`;
+    }).join("");
+
+    const statusText = issue.status === "open"
+        ? "Opened" : "Closed";
+
+    if (issue.priority === "high") {
+        priorityColor.text = "text-white";
+        priorityColor.bg = "bg-red-600";
+    } else if (issue.priority === "medium") {
+        priorityColor.text = "text-white";
+        priorityColor.bg = "bg-orange-600";
+    } else if (issue.priority === "low") {
+        priorityColor.text = "text-white";
+        priorityColor.bg = "bg-gray-600";
+    }
+
+    const capTitle = issue.title
+        .split(" ")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
+    const capAssignee = issue.assignee
+        .split("_")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
+    const modal = document.createElement("div");
+
+    modal.classList.add(
+        "fixed", "inset-0", "flex", "items-center", "justify-center", "z-50",
+
+    );
+    modal.innerHTML = `
+   <div class="card-modal w-[80%] md:w-[44%] p-8 bg-white rounded-lg mx-auto space-y-6">
+        <h2 class="modal-title text-[24px] font-bold text-[#1F2937] mb-3">${capTitle}</h2>
+        <div class="flex items-center gap-2 mb-7">
+            <div>
+                <p class="modal-status py-1.5 px-2 ${statusColor} text-white text-[12px] font-medium rounded-full">
+                    ${statusText}</p>
+            </div>
+            <div class="rounded-full bg-gray-400 w-1 h-1"></div>
+            <div>
+                <p class=" text-gray-400 text-[12px]"><span>${statusText}</span> by <span class="asignee">${capAssignee}</span></p>
+            </div>
+            <div class="rounded-full bg-gray-400 w-1 h-1"></div>
+            <div>
+                <p class="update-date text-gray-400 text-[12px]">${new Date(issue.updatedAt).toLocaleDateString()}</span>
+                </p>
+            </div>
+        </div>
+        <div class="flex gap-2 mt-3">
+                        ${labelsContent}
+                    </div>
+        <div>
+            <p class="text-gray-400 text-[16px]">${issue.description}}</p>
+        </div>
+        <div class="flex p-4 gap-3">
+            <div class="flex-1">
+                <p class="text-gray-400 text-[16px] mb-1">Assignee:</p>
+                <p class="Assignee text-[#1F2937] font-semibold text-[16px]">${capAssignee}</p>
+            </div>
+            <div class="flex-1">
+                <p class="text-gray-400 text-[16px] mb-0">Priority:</p>
+                <p class="modal-priority inline-block py-1.5 px-4 text-center ${priorityColor.bg} text-white text-[12px] font-medium rounded-full">
+                    ${issue.priority.toUpperCase()}</p>
+            </div>
+        </div>
+<div class="flex justify-end items-end">
+            <button
+                class="btn-close bg-[#4A00FF] text-white font-semibold text-[16px] rounded-lg  py-3 px-4  hover:bg-blue-400 ">Close</button>
+
+        </div>    </div>`;
+
+    document.body.appendChild(modal);
+
+    modal.querySelector(".btn-close").addEventListener("click", () => {
+        modal.remove();
+    });
+}
+
+
+
+

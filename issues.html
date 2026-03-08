@@ -41,7 +41,7 @@
         </nav>
     </div>
 
-    <div class="md:w-[70%] mt-15 w-[90%] mx-auto gap-2 p-6 rounded-lg shadow bg-white flex">
+    <div class="md:w-[70%] mt-15 w-[90%] mx-auto gap-2 p-6 rounded-lg shadow bg-white flex flex-wrap">
         <button onclick="toggleStyle('all-btn')" id="all-btn"
             class="text-[16px]  py-3 px-[38.5px] rounded-lg font-semibold border border-gray-300 bg-[#4A00FF] text-white  hover:bg-blue-400  ">ALL</button>
         <button onclick="toggleStyle('open-btn')" id="open-btn"
@@ -53,7 +53,7 @@
     <main class="md:w-[70%] mt-4 w-[90%] mx-auto flex-wrap  rounded-lg shadow bg-white">
         <section>
             <div class="flex justify-between p-6">
-                <div class="flex items-center gap-2">
+                <div class="flex flex-wrap items-center gap-2">
                     <div class="bg-gray-300 w-[50px] h-[50px]  p-3 rounded-full">
                         <img src="./assets/Aperture.png" alt="">
                     </div>
@@ -80,7 +80,7 @@
 
         <section class="p-6">
             <div id="issues-container" class="grid md:grid-cols-4 gap-3 grid-cols-1">
-                <div class="card rounded-md  border-t-2 border-t-green-600 p-4 shadow-md">
+                <!-- <div class="card rounded-md  border-t-2 border-t-green-600 p-4 shadow-md">
                     <div class="flex items-center justify-between">
                         <img class="status-img" src="./assets/Open-Status.png" alt="">
                         <p class="status_text bg-red-100 text-[12px] rounded-2xl py-1.5 px-6 text-red-600">High</p>
@@ -110,13 +110,53 @@
                         <p class="text-[12px] text-gray-400">1/15/2024</p>
                     </div>
 
-                </div>
+                </div> -->
             </div>
-
         </section>
+
     </main>
 
 
+    <!-- <div class="card-modal w-[80%] md:w-[44%] p-8 bg-white rounded-lg mx-auto space-y-6">
+        <h2 class="modal-title text-[24px] font-bold text-[#1F2937] mb-3"></h2>
+        <div class="flex items-center gap-2 mb-7">
+            <div>
+                <p class="modal-status py-1.5 px-2 bg-green-600 text-white text-[12px] font-medium rounded-full">
+                    opened</p>
+            </div>
+            <div class="rounded-full bg-gray-400 w-1 h-1"></div>
+            <div>
+                <p class=" text-gray-400 text-[12px]">Opened by <span class="asignee">Fahim Ahmed</span></p>
+            </div>
+            <div class="rounded-full bg-gray-400 w-1 h-1"></div>
+            <div>
+                <p class="update-date text-gray-400 text-[12px]">ghgjhjh</span>
+                </p>
+            </div>
+        </div>
+        <div class="label"></div>
+        <div>
+            <p class="text-gray-400 text-[16px]">The navigation menu doesn't collapse properly on mobile devices.
+                Need to fix the responsive behavior.</p>
+        </div>
+        <div class="flex p-4 gap-3">
+            <div class="flex-1">
+                <p class="text-gray-400 text-[16px] mb-1">Assignee:</p>
+                <p class="Assignee text-[#1F2937] font-semibold text-[16px]">Fahim Ahmed</p>
+            </div>
+            <div class="flex-1">
+                <p class="text-gray-400 text-[16px] mb-0">Priority:</p>
+                <p
+                    class="modal-priority inline-block py-1.5 px-4 text-center bg-red-600 text-white text-[12px] font-medium rounded-full">
+                    HIGH</p>
+            </div>
+        </div>
+        <div class="flex justify-end items-end">
+            <button
+                class="btn-close bg-[#4A00FF] text-white font-semibold text-[16px] rounded-lg  py-3 px-4  hover:bg-blue-400 ">Close</button>
+
+        </div>
+    </div> -->
 
 
     <script src="script.js"></script>
