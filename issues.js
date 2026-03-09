@@ -25,9 +25,6 @@ newIssueBtn.addEventListener("click", () => {
 
     document.body.appendChild(popup);
 
-    setTimeout(() => {
-        popup.remove();
-    }, 2000);
 });
 
 
@@ -85,10 +82,13 @@ const loadAllIssues = () => {
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then(res => res.json())
         .then(json => {
-            allIssues = json.data;
-            displayAllIssues(allIssues);
-            manageSpinner(false);
+            setTimeout(() => {
+                allIssues = json.data;
+                displayAllIssues(allIssues);
+                manageSpinner(false);
+            }, 500);
         })
+
 
 };
 
@@ -113,23 +113,29 @@ function toggleStyle(id) {
 
 
 function filterIssues() {
-    const input = searchIssue.value.toLowerCase();
+    manageSpinner(true);
+    setTimeout(() => {
+        const input = searchIssue.value.toLowerCase();
 
-    let filtered = allIssues;
-    if (currentStatus === "open-btn") {
-        filtered = allIssues.filter(issue => issue.status === "open");
-    } else if (currentStatus === "closed-btn") {
-        filtered = allIssues.filter(issue => issue.status === "closed");
-    }
+        let filtered = allIssues;
 
-    filtered = filtered.filter(issue => {
-        return (
-            issue.title.toLowerCase().includes(input) ||
-            issue.description.toLowerCase().includes(input)
-        );
-    });
+        if (currentStatus === "open-btn") {
+            filtered = allIssues.filter(issue => issue.status === "open");
+        } else if (currentStatus === "closed-btn") {
+            filtered = allIssues.filter(issue => issue.status === "closed");
+        }
 
-    displayAllIssues(filtered);
+        filtered = filtered.filter(issue => {
+            return (
+                issue.title.toLowerCase().includes(input) ||
+                issue.description.toLowerCase().includes(input)
+            );
+        });
+
+        displayAllIssues(filtered);
+
+        manageSpinner(false);
+    }, 300);
 }
 
 
@@ -194,7 +200,7 @@ function displayAllIssues(issues) {
                 <div class="mt-3 mb-4">
                     <h2 class="card-title font-semibold">${capTitle}</h2>
                     <p class="title-text text-[12px] text-gray-400">${issue.description}</p>
-                    <div class="flex gap-2 mt-3">
+                    <div class="flex flex-wrap gap-2 mt-3">
                         ${labelsContent}
                     </div>
                 </div>
