@@ -3,12 +3,33 @@ let currentStatus = "all";
 
 const container = document.getElementById("issues-container");
 const issuesNo = document.getElementById("issuesNo");
-
 const allBtn = document.getElementById("all-btn");
 const openBtn = document.getElementById("open-btn");
 const closedBtn = document.getElementById("closed-btn");
 
 const searchIssue = document.getElementById("search");
+
+
+const newIssueBtn = document.getElementById("newIssue-btn");
+
+newIssueBtn.addEventListener("click", () => {
+    const popup = document.createElement("div");
+
+    popup.classList.add(
+        "fixed", "top-5", "right-5", "bg-white", "p-4", "rounded-lg", "shadow-lg", "z-50"
+    );
+
+    popup.innerHTML = `
+        <p class="text-pink-800 font-bold">No issue can be added</p>
+    `;
+
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+        popup.remove();
+    }, 2000);
+});
+
 
 const manageSpinner = (status) => {
     if (status == true) {
